@@ -1,15 +1,15 @@
+import os
 from fastapi import FastAPI, HTTPException
 import mysql.connector
-from typing import List
 
 app = FastAPI()
 
-# Database connection configuration (masked for security)
+# Database configuration using environment variables
 DB_CONFIG = {
-    "host": "exelixis-us-west-2-gxp-prd-rds-mysql-cluster-1.c1gq8o602hl6.us-west-2.rds.amazonaws.com",
-    "user": "rrossinni",
-    "password": "/jq[FkJU-t8ec[m5GE*R",
-    "database": "BiometricsTracking"
+    "host": os.environ.get("DB_HOST"),
+    "user": os.environ.get("DB_USER"),
+    "password": os.environ.get("DB_PASSWORD"),
+    "database": os.environ.get("DB_NAME")
 }
 
 # Function to get a new database connection
