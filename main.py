@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI, HTTPException
 import mysql.connector
+import uvicorn
 
 app = FastAPI()
 
@@ -47,3 +48,8 @@ def get_table_data(table_name: str):
         raise HTTPException(status_code=400, detail=f"MySQL error: {err}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# Uvicorn startup logic for Render deployment
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
