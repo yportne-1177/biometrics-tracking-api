@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: biometrics-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: DB_HOST
+        value: your-db-host
+      - key: DB_USER
+        value: your-db-user
+      - key: DB_PASSWORD
+        value: your-db-password
+      - key: DB_NAME
+        value: BiometricsTracking
